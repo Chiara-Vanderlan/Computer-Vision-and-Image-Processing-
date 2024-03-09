@@ -1,0 +1,37 @@
+#To reduce the number of intensity levels in an image from 256 to 2, in integer powers of 2. 
+#The desired number of intensity levels needs to be a variable input to your program.
+
+import numpy as np
+from PIL import Image
+
+#Function to reduce the intensity level when the image and intensity level is given 
+def processing(path, levels):
+    #Opening the image
+    image = Image.open(path)
+
+    #Converting the image to greyscale
+    image_gray = image.convert("L")
+
+    #Converting image into array 
+    image_array = np.array(image_gray)
+
+    #adjusting to the intensity level
+    scale_factor = 255 / (levels -1)
+    quanlized_image = (np.round(image_array / scale_factor)* scale_factor).astype(np.uint8)
+
+    #Converting array into image
+    final_image = Image.fromarray(quanlized_image)
+
+    return final_image
+
+
+#Path of the image
+path = "dog.jpg"
+
+#inserting the intensity level
+intensity_levels = int(input('No.of intensity levels : '))
+
+#Calling the function
+processed_image = processing(path,intensity_levels)
+#Saving the image
+processed_image.save("Processed_images/Reduced_intensity.jpg")
