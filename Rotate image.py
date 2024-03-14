@@ -4,7 +4,7 @@
 from PIL import Image
 
 #Import the image
-image = Image.open('dog.jpg')
+image = Image.open('cat.jpg')
 
 #Rotate the image by 45 degree
 rotate_45 = image.rotate(45)

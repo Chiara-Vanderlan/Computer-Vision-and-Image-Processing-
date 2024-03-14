@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 #Loading the image using open cv
-image = cv2.imread('dog.jpg')
+image = cv2.imread('cat.jpg')
 
 #Rotate 90  degree  
 rotated_image_90 = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
