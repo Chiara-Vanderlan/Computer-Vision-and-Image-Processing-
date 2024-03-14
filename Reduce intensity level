@@ -1,11 +1,13 @@
+#Question 1
 #To reduce the number of intensity levels in an image from 256 to 2, in integer powers of 2. 
 #The desired number of intensity levels needs to be a variable input to your program.
 
 import numpy as np
 from PIL import Image
 
-#Function to reduce the intensity level when the image and intensity level is given 
+#Function to reduce the intensity level when the image path and intensity level is given 
 def processing(path, levels):
+    
     #Opening the image
     image = Image.open(path)
 
@@ -34,4 +36,4 @@ intensity_levels = int(input('No.of intensity levels : '))
 #Calling the function
 processed_image = processing(path,intensity_levels)
 #Saving the image
-processed_image.save("Processed_images/Reduced_intensity.jpg")
+processed_image.save("Q1/Reduced_intensity.jpg")
