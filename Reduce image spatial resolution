@@ -1,46 +1,48 @@
+#Q4
+#For every 3×3 block of the image (without overlapping), replace all corresponding 9 pixels by their average. 
+#This operation simulates reducing the image spatial resolution. 
+#Repeat this for 5×5 blocks and 7×7 blocks. 
+
 import cv2
 import numpy as np
 
+# Load the image
+image = cv2.imread('cat.jpg')
+
+# Convert the image to grayscale
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Obtaining the dimensions of the image
+height, width = image_gray.shape[:2]
+
+
 def process(image, block_size):
-    height,width = image.shape[:2]
 
-    #Calculating the no.of blocks
-    no_of_block_height = height //block_size
-    no_of_block_width = width //block_size
+    for y in range(0, height, block_size):
+        for x in range(0, width, block_size):
 
-    #output(Processed image)
-    processed_img= np.zeros(( no_of_block_height,no_of_block_width,3),dtype=np.uint8)
+            # Define region current block
+            region = image[y:y+block_size, x:x+block_size]
 
-    for i in range(no_of_block_height):
-        for j in range(no_of_block_width):
-            start_y = i* block_size
-            end_y = (i+1)*block_size
-            start_x = j*block_size
-            end_x = (j+1)*block_size
+            # Calculating the average value
+            average = np.mean(region)
 
-            #Extracting block
-            block = image[start_y:end_y,start_x:end_x]
+            # Replace the block with the average value
+            image[y:y+block_size, x:x+block_size] = average
 
-            #Calculating the avarga pixel in the block
-            avg_colour = np.mean(block,axis=(0,1))
+    # Convert the image back
+    image = np.uint8(image)
+    return image
 
-            #Fill the output image with the avg pixel
-            processed_img[i,j]= avg_colour
+#applying the filter process and saving the images
+processed_image1 = process(image_gray,3)
+cv2.imwrite('Q4/Processed image_3x3.jpg', processed_image1)
 
-    return processed_img
+processed_image2 = process(image_gray,5)
+cv2.imwrite('Q4/Processed image_5x5.jpg', processed_image2)
 
-#Obtaining the input 
-input_image =cv2.imread('dog.jpg')
-
-#Processing the image s
-processed_img_3x3 = process(input_image,3)
-cv2.imshow('3x3 processed image', processed_img_3x3)
-
-processed_img_5x5 = process(input_image,5)
-cv2.imshow('5x5 processed image', processed_img_5x5)
-
-processed_img_10x10 = process(input_image,10)
-cv2.imshow('10x10 processed image', processed_img_10x10)
+processed_image3 = process(image_gray,7)
+cv2.imwrite('Q4/Processed image_7x7.jpg', processed_image3)
 
 
 cv2.waitKey(0)

@@ -8,6 +8,10 @@ import numpy as np
 
 #Loading the image using open cv
 image = cv2.imread('dog.jpg')
+
+#Convert to gray scale 
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
 #Function to perform spatial 3*3 avarage 
 def filter(image,neighborhood_size):
 
@@ -20,9 +24,9 @@ def filter(image,neighborhood_size):
 
 
 #applying the filter process
-processed_image1 = filter(image,3)
-processed_image2 = filter(image,10)
-processed_image3 = filter(image,20)
+processed_image1 = filter(image_gray,3)
+processed_image2 = filter(image_gray,10)
+processed_image3 = filter(image_gray,20)
 
 
 # Saving the processed images
