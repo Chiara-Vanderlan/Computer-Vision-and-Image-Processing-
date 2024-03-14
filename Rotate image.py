@@ -1,13 +1,17 @@
+#Q3
+#Rotate an image by 45 and 90 degrees. 
+
 from PIL import Image
 
 #Import the image
 image = Image.open('dog.jpg')
 
+#Rotate the image by 45 degree
+rotate_45 = image.rotate(45)
+
 #Rotate the image by 90 degree
 rotate_90 = image.rotate(90)
 
-#Rotate the image by 180 degree
-rotate_180 = image.rotate(180)
 
-rotate_90.save("Processed_images/image_rotateby90.jpg")
-rotate_180.save("Processed_images/image_rotateby180.jpg")
+rotate_45.save("Q3/image_rotateby45.jpg")
+rotate_90.save("Q3/image_rotateby90.jpg")
